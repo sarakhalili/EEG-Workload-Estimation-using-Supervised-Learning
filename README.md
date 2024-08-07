@@ -62,11 +62,7 @@ o	Architecture: A simple ANN architecture with fully connected layers was used.
 o	Parameters: The number of filters, kernel size, and number of neurons in fully connected layers were optimized.
 
 The results are summarized in the following table:
-Model	Accuracy	Precision	Recall	F1-Score
-SVM	77.0%	76.1%	76.5%	74.2%
-K-Nearest Neighbors	74.2%	81.8%	77.8%	74.5%
-Gradient Boosting	83.7%	81.8%	82.7%	81.6%
-Artificial Neural Network (ANN)	76.8%	82.9%	79.7%	78.3%
+![Results](4-Model Comparison_table.png)
 
 
 ## Project Structure
