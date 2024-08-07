@@ -6,16 +6,13 @@ The objective of this project is to analyze workload levels using EEG data from 
 This dataset consists of raw EEG data from 48 subjects who participated in a multitasking workload experiment utilizing the SIMKAP multitasking test. The subjects’ brain activity at rest was also recorded before the test and is included as well. The Emotiv EPOC device, with sampling frequency of 128Hz and 14 channels was used to obtain the data, with 2.5 minutes of EEG recording for each case. Subjects were also asked to rate their perceived mental workload after each stage on a rating scale of 1 to 9 and the ratings are provided in a separate file.
 
 ## Data Preprocessing
-The preprocessing steps involved cleaning the EEG data to ensure it is suitable for analysis. The following steps were taken:
+The preprocessing steps involved cleaning the EEG data to ensure its suitability for analysis. The steps were:
 
-1.	**Artifact Removal:** Using techniques such as Independent Component Analysis (ICA) to remove eye blinks and other artifacts from the EEG signals.
-Independent Component Analysis (ICA) removes artifacts from EEG data by separating the recorded signals into statistically independent components, each representing a different source of brain activity or noise. Artifacts such as eye blinks, muscle movements or electrical noise typically exhibit distinctive and recognizable patterns. For instance, eye blink artifacts often show strong activity in the frontal electrodes, while muscle artifacts can appear as high-frequency noise localized to specific areas. By plotting these components, we can visually inspect and distinguish between true neural signals and artifacts. The ICA results for the first 3 subjects are depicted in Image1. According to these results, the 000,003,004, and 007 components were dropped for further analyses.
+1. **Artifact Removal**: Techniques like Independent Component Analysis (ICA) were used to eliminate eye blinks and other artifacts from the EEG signals. ICA separates the recorded signals into statistically independent components, allowing us to identify and remove artifacts such as eye blinks and muscle movements. For the first three subjects, components 000, 003, 004, and 007 were discarded based on ICA results.
 
-![ICA Visualization](images/1-ICA Viz.png)
+![ICA Visualization](images/ICA Viz.png)
 
-
-3.	**Filtering:** Applying band-pass filters to remove noise and retain relevant frequency bands (e.g., 0.5-50 Hz).
-Filtering EEG data is essential to remove noise and artifacts that can obscure the true neural signals. EEG recordings are susceptible to various types of interference, including power line noise, muscle activity, eye movements, and other external electrical sources. These unwanted signals can contaminate the data, making it difficult to accurately analyze brain activity. By applying filters, such as high-pass, low-pass, and band-pass filters, we can selectively remove these unwanted frequencies and enhance the clarity of the neural signals. This preprocessing step improves the signal-to-noise ratio, facilitating more accurate interpretation and analysis of the EEG data for research or clinical purposes.
+2. **Filtering**: Band-pass filters were applied to remove noise and retain relevant frequency bands (e.g., 0.5-50 Hz). Filtering enhances the clarity of the neural signals by eliminating unwanted frequencies, improving the signal-to-noise ratio for more accurate analysis.
 
 ## Feature Extraction
 Feature extraction is crucial for translating raw EEG data into meaningful inputs for machine learning models. The following features were extracted:
@@ -73,15 +70,43 @@ o	Parameters: The number of filters, kernel size, and number of neurons in fully
 ![Model comparison](images/Model comparison.png)
 
 ## Project Structure
-**"ICA Visualization"** performs preprocessing and visualization of Independent Component Analysis (ICA) components for EEG data artifact removal. It begins by defining a function high_pass_filter to apply a high-pass filter to the EEG data, removing low-frequency noise. The main function, ica_comp_viz, loads EEG data from a specified file path, transposes it, and applies the high-pass filter. The EEG data is then structured into an MNE RawArray format, with channel names and sampling frequency information. A standard electrode montage is set, and ICA is applied to decompose the EEG data into independent components. Finally, the ICA components are visualized to help identify and remove artifacts from the EEG recordings. The example usage demonstrates how to call the ica_comp_viz function with a file path to an EEG data file.
 
-**"Artifact & noise removal"** loads and preprocesses EEG data from text files, applying artifact removal and band-pass filtering to prepare the data for analysis. The load_and_preprocess_data function loads EEG data from a specified file path, removes artifacts using Independent Component Analysis (ICA), and applies a band-pass filter to retain frequencies between 0.5 and 50 Hz. The main script reads EEG data files from a dataset folder, extracting subject numbers and corresponding ratings from a separate ratings.txt file. For each EEG data file, the script preprocesses the data using the defined function, then stores the processed data and associated ratings in lists. The ratings are used to generate both continuous and binary labels based on the file naming convention. Finally, the processed EEG data and labels are converted to numpy arrays and saved to disk for future use.
+**"ICA Visualization"**:
+- **Purpose**: Preprocessing and visualization of ICA components for EEG data artifact removal.
+- **Steps**:
+  - Applies a high-pass filter to remove low-frequency noise.
+  - Loads and transposes EEG data, formats it into an MNE RawArray, sets electrode montage, and applies ICA.
+  - Visualizes ICA components to identify and remove artifacts.
+- **Usage**: Call `ica_comp_viz` with the EEG data file path.
 
-**"Feature Extraction"** involves loading preprocessed EEG data and labels, and then iterating through the data to segment it based on window size = 30s and overlap = 15s. For each segment, the code computes all types of features, including Power Spectral Density (PSD) features, amplitude-related features, entropy features, fractal dimension features, and detrended fluctuation analysis. These features are calculated using functions from libraries like NumPy, SciPy, and Antropy. The extracted features are then organized into a DataFrame, which is saved as a CSV file for further analysis and model training.
+**"Artifact & Noise Removal"**:
+- **Purpose**: Load and preprocess EEG data from text files.
+- **Steps**:
+  - Removes artifacts using ICA and applies a band-pass filter (0.5-50 Hz).
+  - Reads data files, extracts subject numbers and ratings, preprocesses data, and stores processed data and labels.
+  - Converts processed data and labels to numpy arrays and saves them.
 
-**"Feature Importance"** performs feature selection and importance analysis using a RandomForestClassifier on EEG workload estimation data. It begins by preparing the feature set (X) and labels (y) from the DataFrame features_df. Labels are converted to binary classes where values less than 5 are set to 0, and values 5 and above are set to 1. The RandomForestClassifier is trained on this data to determine the importance of each feature. The resulting feature importances are sorted, and the top 10 most important features are selected and saved to a new CSV file. Finally, a bar plot is generated to visualize the importance of all features, with a highlight on the top 10 features. Also, the importance for each feature is shown in Image2.
+**"Feature Extraction"**:
+- **Purpose**: Load preprocessed EEG data and labels, segment data, and compute features.
+- **Steps**:
+  - Segments data into 30s windows with 15s overlap.
+  - Computes features like PSD, amplitude, entropy, fractal dimension, and detrended fluctuation analysis.
+  - Organizes features into a DataFrame and saves it as a CSV file.
 
-**"Model Comparison"** performs a comprehensive analysis to compare different machine learning models for EEG workload estimation using selected features from a dataset. Initially, it loads the dataset and splits it into training and testing sets. The features are standardized, and labels are converted to binary classes and one-hot encoded for use with an Artificial Neural Network (ANN). The code implements cross-validation and hyperparameter tuning using GridSearchCV for three classifiers: Support Vector Machine (SVM), K-Nearest Neighbors (KNN), and Gradient Boosting. For each model, the best parameters are selected based on cross-validation scores. Additionally, an ANN model is built and trained using different hyperparameters. The performance of each model is evaluated and stored in a dictionary. Finally, classification reports for each model are printed, and a bar plot (Image3) is created to visualize and compare the accuracy of the models, identifying the best-performing model. The results are summarized in the Image4 table.
+**"Feature Importance"**:
+- **Purpose**: Perform feature selection and importance analysis using RandomForestClassifier.
+- **Steps**:
+  - Prepares features (X) and labels (y), converts labels to binary.
+  - Trains classifier, sorts and selects top 10 features, and saves them.
+  - Visualizes feature importance with a bar plot (highlighting top 10).
+
+**"Model Comparison"**:
+- **Purpose**: Compare machine learning models for EEG workload estimation.
+- **Steps**:
+  - Loads and splits dataset, standardizes features, and converts labels to binary and one-hot encoded.
+  - Implements cross-validation and hyperparameter tuning for SVM, KNN, and Gradient Boosting.
+  - Builds and trains an ANN model with various hyperparameters.
+  - Evaluates model performance, prints classification reports, and visualizes accuracy with bar plots and summary tables (Image4).
 
 
 ## Dependencies
