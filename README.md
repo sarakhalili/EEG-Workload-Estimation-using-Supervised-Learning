@@ -10,7 +10,7 @@ The preprocessing steps involved cleaning the EEG data to ensure its suitability
 
 1. **Artifact Removal**: Techniques like Independent Component Analysis (ICA) were used to eliminate eye blinks and other artifacts from the EEG signals. ICA separates the recorded signals into statistically independent components, allowing us to identify and remove artifacts such as eye blinks and muscle movements. For the first three subjects, components 000, 003, 004, and 007 were discarded based on ICA results.
 
-![ICA Visualization](images/ICA Viz.png)
+![ICA Visualization](images/ICA%20Viz.png)
 
 2. **Filtering**: Band-pass filters were applied to remove noise and retain relevant frequency bands (e.g., 0.5-50 Hz). Filtering enhances the clarity of the neural signals by eliminating unwanted frequencies, improving the signal-to-noise ratio for more accurate analysis.
 
@@ -49,11 +49,7 @@ To select the 10 best features, we can use a feature importance algorithm such a
 3.	Determine the importance of each feature.
 4.	Select the 10 most important features.
 
-
-
-![Feature importance](images/Feature Importance.png)
-
-
+![Feature importance](images/Feature%20Importance.png)
 
 ## Model Development
 Five machine learning models were selected for this project: Support Vector Machine (SVM), Random Forest, K-Nearest Neighbors (KNN), Gradient Boosting, and a Convolutional Neural Network (CNN). These models were chosen due to their effectiveness in classification tasks.
@@ -72,11 +68,9 @@ o	Parameters: The number of filters, kernel size, and number of neurons in fully
 
 
 
-![Model comparison](images/Model comparison_table.png)
+![Model comparison](images/Model%20comparison_table.png)
 
-
-
-![Model comparison](images/Model comparison.png)
+![Model comparison](images/Model%20comparison.png)
 
 ## Project Structure
 
