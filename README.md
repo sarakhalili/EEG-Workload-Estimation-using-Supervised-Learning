@@ -66,9 +66,7 @@ o	Number of Estimators: The number of boosting stages was set to 100.
 o	Architecture: A simple ANN architecture with fully connected layers was used.
 o	Parameters: The number of filters, kernel size, and number of neurons in fully connected layers were optimized.
 
-
-
-![Model comparison](images/Model%20comparison_table.png)
+![Model comparison_table](images/Model%20comparison_table.png)
 
 ![Model comparison](images/Model%20comparison.png)
 
