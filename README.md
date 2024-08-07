@@ -11,7 +11,10 @@ The preprocessing steps involved cleaning the EEG data to ensure it is suitable 
 1.	**Artifact Removal:** Using techniques such as Independent Component Analysis (ICA) to remove eye blinks and other artifacts from the EEG signals.
 Independent Component Analysis (ICA) removes artifacts from EEG data by separating the recorded signals into statistically independent components, each representing a different source of brain activity or noise. Artifacts such as eye blinks, muscle movements or electrical noise typically exhibit distinctive and recognizable patterns. For instance, eye blink artifacts often show strong activity in the frontal electrodes, while muscle artifacts can appear as high-frequency noise localized to specific areas. By plotting these components, we can visually inspect and distinguish between true neural signals and artifacts. The ICA results for the first 3 subjects are depicted in Image1. According to these results, the 000,003,004, and 007 components were dropped for further analyses.
 
-2.	**Filtering:** Applying band-pass filters to remove noise and retain relevant frequency bands (e.g., 0.5-50 Hz).
+![Preprocessed vs Raw ECG Signal](Images/1-ICA Viz.png)
+
+
+3.	**Filtering:** Applying band-pass filters to remove noise and retain relevant frequency bands (e.g., 0.5-50 Hz).
 Filtering EEG data is essential to remove noise and artifacts that can obscure the true neural signals. EEG recordings are susceptible to various types of interference, including power line noise, muscle activity, eye movements, and other external electrical sources. These unwanted signals can contaminate the data, making it difficult to accurately analyze brain activity. By applying filters, such as high-pass, low-pass, and band-pass filters, we can selectively remove these unwanted frequencies and enhance the clarity of the neural signals. This preprocessing step improves the signal-to-noise ratio, facilitating more accurate interpretation and analysis of the EEG data for research or clinical purposes.
 
 ## Feature Extraction
