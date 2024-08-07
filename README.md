@@ -62,7 +62,7 @@ o	Architecture: A simple ANN architecture with fully connected layers was used.
 o	Parameters: The number of filters, kernel size, and number of neurons in fully connected layers were optimized.
 
 The results are summarized in the following table:
-![Results](EEG-Workload-Estimation-/4-Model Comparison_table.png)
+![Results](4-Model Comparison_table.png)
 
 
 ## Project Structure
