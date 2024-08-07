@@ -8,10 +8,10 @@ This dataset consists of raw EEG data from 48 subjects who participated in a mul
 ## Data Preprocessing
 The preprocessing steps involved cleaning the EEG data to ensure it is suitable for analysis. The following steps were taken:
 
-1.	Artifact Removal: Using techniques such as Independent Component Analysis (ICA) to remove eye blinks and other artifacts from the EEG signals.
-Independent Component Analysis (ICA) removes artifacts from EEG data by separating the recorded signals into statistically independent components, each representing a different source of brain activity or noise. Visualizing ICA components helps identify artifacts in EEG data by allowing researchers to examine the spatial and temporal patterns of each independent component. Artifacts such as eye blinks, muscle movements, or electrical noise typically exhibit distinctive and recognizable patterns. For instance, eye blink artifacts often show strong activity in the frontal electrodes, while muscle artifacts can appear as high-frequency noise localized to specific areas. By plotting these components, we can visually inspect and distinguish between true neural signals and artifacts. The ICA results for the first 3 subject are depicted in Image1. According to these results, the 000,003,004, and 007 components were dropped for further analyses.
+1.	**Artifact Removal:** Using techniques such as Independent Component Analysis (ICA) to remove eye blinks and other artifacts from the EEG signals.
+Independent Component Analysis (ICA) removes artifacts from EEG data by separating the recorded signals into statistically independent components, each representing a different source of brain activity or noise. Artifacts such as eye blinks, muscle movements or electrical noise typically exhibit distinctive and recognizable patterns. For instance, eye blink artifacts often show strong activity in the frontal electrodes, while muscle artifacts can appear as high-frequency noise localized to specific areas. By plotting these components, we can visually inspect and distinguish between true neural signals and artifacts. The ICA results for the first 3 subjects are depicted in Image1. According to these results, the 000,003,004, and 007 components were dropped for further analyses.
 
-2.	Filtering: Applying band-pass filters to remove noise and retain relevant frequency bands (e.g., 0.5-50 Hz).
+2.	**Filtering:** Applying band-pass filters to remove noise and retain relevant frequency bands (e.g., 0.5-50 Hz).
 Filtering EEG data is essential to remove noise and artifacts that can obscure the true neural signals. EEG recordings are susceptible to various types of interference, including power line noise, muscle activity, eye movements, and other external electrical sources. These unwanted signals can contaminate the data, making it difficult to accurately analyze brain activity. By applying filters, such as high-pass, low-pass, and band-pass filters, we can selectively remove these unwanted frequencies and enhance the clarity of the neural signals. This preprocessing step improves the signal-to-noise ratio, facilitating more accurate interpretation and analysis of the EEG data for research or clinical purposes.
 
 ## Feature Extraction
@@ -51,16 +51,16 @@ To select the 10 best features, we can use a feature importance algorithm such a
 
 ## Model Development
 Five machine learning models were selected for this project: Support Vector Machine (SVM), Random Forest, K-Nearest Neighbors (KNN), Gradient Boosting, and a Convolutional Neural Network (CNN). These models were chosen due to their effectiveness in classification tasks.
-1.	Support Vector Machine (SVM):
+1.	**Support Vector Machine (SVM):**
 o	Kernel: Radial Basis Function (RBF) kernel was used for its ability to handle non-linear relationships in the data.
 o	Parameters: Hyperparameters such as C (regularization parameter) and gamma were optimized using grid search and cross-validation.
-2.	K-Nearest Neighbors (KNN):
+2.	**K-Nearest Neighbors (KNN):**
 o	Neighbors: The number of neighbors (k) was optimized using grid search.
 o	Distance Metric: Euclidean distance was used for calculating the distance between points.
-3.	Gradient Boosting:
+3.	**Gradient Boosting:**
 o	Learning Rate: The learning rate was optimized to balance between model complexity and performance.
 o	Number of Estimators: The number of boosting stages was set to 100.
-4.	Artificial Neural Network (ANN):
+4.	**Artificial Neural Network (ANN):**
 o	Architecture: A simple ANN architecture with fully connected layers was used.
 o	Parameters: The number of filters, kernel size, and number of neurons in fully connected layers were optimized.
 
