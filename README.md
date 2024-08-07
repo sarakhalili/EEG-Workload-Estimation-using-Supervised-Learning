@@ -16,28 +16,31 @@ Filtering EEG data is essential to remove noise and artifacts that can obscure t
 
 ## Feature Extraction
 Feature extraction is crucial for translating raw EEG data into meaningful inputs for machine learning models. The following features were extracted:
-### Power Spectral Density (PSD) and related features.
-1.	mean_PSD (Mean Power Spectral Density): This feature represents the average power of the EEG signal across different frequency bands. Power Spectral Density (PSD) is computed using the Welch method, which provides a measure of the power contained in the signal's frequency components. The mean PSD is useful for understanding the overall power distribution in the EEG signal, which can help in identifying characteristic frequency patterns associated with different cognitive states or abnormalities.
-2.	STD_PSD (Standard Deviation of Power Spectral Density): This feature indicates the variability of the power spectral density across frequency bands. A higher standard deviation in PSD suggests greater fluctuations in power across different frequencies, which could be indicative of diverse neural activity or noise. This feature helps in assessing the consistency of the power distribution within the EEG signal.
-3.	mean_PSD_delta, mean_PSD_theta, mean_PSD_alpha, mean_PSD_beta, mean_PSD_gamma: These features represent the mean power spectral density within each respective frequency band (delta, theta, alpha, beta, gamma). Each band is associated with different types of neural activity, such as deep sleep (delta) or active thinking (beta).
-4.	STD_PSD_delta, STD_PSD_theta, STD_PSD_alpha, STD_PSD_beta, STD_PSD_gamma: These features represent the standard deviation of the power spectral density within each respective frequency band. They provide a measure of how much the power varies within each frequency band, giving insight into the stability and variability of the neural activity within those bands.
-### Amplitude-related features.
-1.	A_mean (Mean Amplitude): The mean amplitude represents the average value of the EEG signal's amplitude over time. This feature provides a basic measure of the signal's magnitude, which can be influenced by the underlying neural activity, baseline shifts, or artifacts. It is useful for comparing the general signal strength across different conditions or subjects.
-2.	A_STD (Standard Deviation of Amplitude): This feature captures the variability in the amplitude of the EEG signal. The standard deviation of the amplitude can reflect the presence of oscillatory activity, noise, or transient events within the signal. It provides insight into the dynamic range and stability of the EEG amplitude over time.
-3.	A_Var (Variance of Amplitude): Variance is a measure of the dispersion of amplitude values around the mean. It indicates how much the amplitude of the EEG signal varies over time. High variance can be associated with a wide range of signal magnitudes, which might be due to neural events, artifacts, or noise. This feature helps in understanding the signal's variability and complexity.
-4.	A_range (Range of Amplitude): The range is the difference between the maximum and minimum amplitude values in the EEG signal. It provides a measure of the signal's amplitude span, capturing the extent of the highest and lowest points in the signal. This feature is useful for identifying the presence of large artifacts or extreme neural events.
-5.	A_skew (Skewness of Amplitude): Skewness quantifies the asymmetry of the amplitude distribution around the mean. A positive skewness indicates that the distribution has a long tail on the right side, while a negative skewness indicates a long tail on the left side. Skewness helps in identifying the directional bias in the amplitude values, which can be indicative of certain types of artifacts or neural patterns.
-6.	A_kurtosis (Kurtosis of Amplitude): Kurtosis measures the "tailedness" of the amplitude distribution. High kurtosis indicates the presence of outliers or sharp peaks in the signal, while low kurtosis suggests a flatter distribution. This feature is useful for detecting transient events or artifacts that cause sudden changes in the amplitude.
-### Entropy and fractal dimension features.
-1.	Permutation_E (Permutation Entropy): Permutation entropy is a measure of the complexity of the EEG signal. It quantifies the disorder or unpredictability of the signal by evaluating the arrangement of its values over time. High permutation entropy indicates a more complex and less predictable signal, which can be associated with various cognitive states or pathological conditions.
-2.	Spectral_E (Spectral Entropy): Spectral entropy measures the disorder of the power spectrum of the EEG signal. It is derived from the distribution of power across different frequency bands. High spectral entropy indicates a more uniform distribution of power across frequencies, suggesting a complex and unpredictable signal. This feature helps in characterizing the signal's frequency complexity.
-3.	SVD_E (Singular Value Decomposition Entropy): SVD entropy is based on the singular value decomposition of the EEG signal's matrix. It quantifies the complexity and redundancy of the signal by analyzing its singular values. High SVD entropy indicates a more complex and less redundant signal structure, providing insights into the underlying neural dynamics.
-4.	Approximate_E (Approximate Entropy): Approximate entropy measures the regularity and complexity of the EEG signal. It quantifies the likelihood that similar patterns in the signal will remain similar over time. Low approximate entropy indicates a more regular and predictable signal, while high entropy suggests greater complexity and irregularity.
-5.	Sample_E (Sample Entropy): Sample entropy is similar to approximate entropy but provides a more accurate and less biased estimate of signal complexity. It measures the probability that similar sequences of data points will remain similar as the sequence progresses. High sample entropy indicates a more complex and irregular signal.
-6.	Petrosian_FD (Petrosian Fractal Dimension): Petrosian fractal dimension quantifies the complexity of the EEG signal's waveform by measuring its fractal characteristics. It provides a measure of the signal's self-similarity and structural complexity. High fractal dimension suggests a more complex and irregular signal, which can be indicative of certain neural activities or disorders.
-7.	Katz_FD (Katz Fractal Dimension): Katz fractal dimension is another measure of the signal's complexity and self-similarity. It evaluates the spatial complexity of the waveform by considering the total length of the signal and the distance between its points. This feature helps in assessing the intricacy of the EEG signal's structure.
-8.	Higuchi_FD (Higuchi Fractal Dimension): Higuchi fractal dimension estimates the fractal dimension of the EEG signal by evaluating its curve length at different scales. It provides a measure of the signal's geometric complexity and can help in identifying intricate patterns associated with various neural processes or conditions.
-9.	Detrended fluctuation analysis: Detrended fluctuation analysis (DFA) measures the long-range temporal correlations within the EEG signal. It evaluates how the signal's fluctuations vary with different time scales after removing trends. DFA is useful for identifying fractal-like properties and understanding the scaling behavior of the signal.
+
+### Power Spectral Density (PSD) and Related Features
+- **mean_PSD**: Average power of the EEG signal across different frequency bands.
+- **STD_PSD**: Variability of the power spectral density across frequency bands.
+- **mean_PSD_delta, mean_PSD_theta, mean_PSD_alpha, mean_PSD_beta, mean_PSD_gamma**: Mean PSD within delta, theta, alpha, beta, and gamma frequency bands.
+- **STD_PSD_delta, STD_PSD_theta, STD_PSD_alpha, STD_PSD_beta, STD_PSD_gamma**: Standard deviation of PSD within respective frequency bands.
+
+### Amplitude-Related Features
+- **A_mean**: Average amplitude of the EEG signal over time.
+- **A_STD**: Variability in the amplitude of the EEG signal.
+- **A_Var**: Dispersion of amplitude values around the mean.
+- **A_range**: Difference between the maximum and minimum amplitude values.
+- **A_skew**: Asymmetry of the amplitude distribution.
+- **A_kurtosis**: "Tailedness" of the amplitude distribution.
+
+### Entropy and Fractal Dimension Features
+- **Permutation_E**: Complexity of the EEG signal.
+- **Spectral_E**: Disorder of the power spectrum.
+- **SVD_E**: Complexity and redundancy of the signal.
+- **Approximate_E**: Regularity and complexity of the EEG signal.
+- **Sample_E**: Complexity and irregularity of the signal.
+- **Petrosian_FD**: Complexity of the waveform by measuring fractal characteristics.
+- **Katz_FD**: Spatial complexity of the waveform.
+- **Higuchi_FD**: Geometric complexity of the EEG signal.
+- **Detrended Fluctuation Analysis (DFA)**: Long-range temporal correlations within the EEG signal.
 
 ## Feature Importance
 To select the 10 best features, we can use a feature importance algorithm such as the Random Forest classifier's feature importance attribute. Here's how to integrate it into the existing code:
